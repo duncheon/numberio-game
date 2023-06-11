@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PrepareGame : MonoBehaviour
 {
-    public TMP_Text username, testID;
+    public TMP_Text username, testID, emailTXT;
     public static PrepareGame Instance;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,7 @@ public class PrepareGame : MonoBehaviour
     {
         username.text = GameInformation.Instance.gameId;
         testID.text = GameInformation.Instance.id;
+        emailTXT.text = GameInformation.Instance.email;
     }
     public void LoadMainLevel()
     {
