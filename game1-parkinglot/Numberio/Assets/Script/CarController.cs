@@ -74,6 +74,7 @@ public class CarController : MonoBehaviour
             if (GameInformation.Instance.curQuestion == GameInformation.Instance.questions.Count - 1)
             {
                 SubmitData();
+                SceneManager.LoadScene("EndScene");
             }
             else
             {
