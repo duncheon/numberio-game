@@ -84,7 +84,7 @@ public class CarController : MonoBehaviour
 
     }
 
-    public void updateAnswer(string answer)
+    public void updateAnswer(int answer)
     {
         if (type != "dummy")
         {
@@ -98,14 +98,14 @@ public class CarController : MonoBehaviour
         Waypoint = WaypointA;
         Target = Waypoint[0];
         Check = true;
-        updateAnswer("A");
+        updateAnswer(1);
     }
     public void ButtonB()
     {
         Waypoint = WaypointB;
         Target = Waypoint[0];
         Check = true;
-        updateAnswer("B");
+        updateAnswer(2);
 
     }
     public void ButtonC()
@@ -113,14 +113,14 @@ public class CarController : MonoBehaviour
         Waypoint = WaypointC;
         Target = Waypoint[0];
         Check = true;
-        updateAnswer("C");
+        updateAnswer(3);
     }
     public void ButtonD()
     {
         Waypoint = WaypointD;
         Target = Waypoint[0];
         Check = true;
-        updateAnswer("D");
+        updateAnswer(4);
     }
 
     public void SubmitData()
@@ -130,11 +130,9 @@ public class CarController : MonoBehaviour
     public IEnumerator PostResult()
     {
         WWWForm form = new();
-        form.AddField("answers", string.Join("", GameInformation.Instance.answers.ToArray()));
-        form.AddField("testId", GameInformation.Instance.testId);
-        form.AddField("userId", GameInformation.Instance.userId);
+        form.AddField("userAnswers", string.Join("", GameInformation.Instance.answers.ToArray()));
 
-        using (UnityWebRequest request = UnityWebRequest.Post(resourceURL, form))
+        using (UnityWebRequest request = UnityWebRequest.Post(resourceURL+GameInformation.Instance.id, form))
 
         {
             yield return request.SendWebRequest();
@@ -144,8 +142,8 @@ public class CarController : MonoBehaviour
             }
             else
             {
-                Result testResult = JsonUtility.FromJson<Result>(request.downloadHandler.text);
-                Debug.Log(testResult.score);
+                GameInformation.Instance.record = JsonUtility.FromJson<GameInformation.RecordModel>(request.downloadHandler.text);
+                Debug.Log(GameInformation.Instance.record.Score);
             }
         }
     }

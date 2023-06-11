@@ -22,8 +22,8 @@ public class SubmitTestResult : MonoBehaviour
         GameInformation gameInfo = GameInformation.Instance;
         WWWForm form = new();
         form.AddField("answer", string.Join("", gameInfo.answers));
-        form.AddField("testId", gameInfo.testId);
-        form.AddField("userId", gameInfo.userId);
+        form.AddField("gameId", gameInfo.gameId);
+        form.AddField("testId", gameInfo.id);
 
 
         using (UnityWebRequest request = UnityWebRequest.Post(resourceURL, form))

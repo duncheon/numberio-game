@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class GetGameInfoWithAPI : MonoBehaviour
 {
-    public const string resourceURL ="http://localhost:3001/getGameInfo";
+    public const string resourceURL = "http://localhost:3001/api/gameSession/getData/";
     public string token;
     public GameObject gameInfomationPanel;
 
@@ -31,12 +31,13 @@ public class GetGameInfoWithAPI : MonoBehaviour
         {
             Debug.Log("Cant iddentify test id");
         }
-
+        PrepareGame.Instance.Prepare();
     }
-
+    // /api/gameSession/$token ///
+    // /api/gameSession/record/ (: userAnswers: [1,2,1,4]) // {questions: explaination,}
     public IEnumerator FetchData()
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(resourceURL))
+        using (UnityWebRequest request = UnityWebRequest.Get(resourceURL+token))
         {
             yield return request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
@@ -47,7 +48,7 @@ public class GetGameInfoWithAPI : MonoBehaviour
             {
                 GameInformation.Instance.setData(request.downloadHandler.text);
 
-                Debug.Log(GameInformation.Instance.getQuestion(0).questionDescription);
+                Debug.Log(GameInformation.Instance.getQuestion(0).des);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }

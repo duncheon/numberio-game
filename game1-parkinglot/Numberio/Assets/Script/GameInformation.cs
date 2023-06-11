@@ -3,28 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameInformation : MonoBehaviour {
+public class GameInformation : MonoBehaviour 
+{
+
+    [System.Serializable]
+    public class QuestionData
+    {
+        public int id;
+        public string des;
+        public string[] answers;
+    }
+    public class RecordQuestionData
+    {
+        public string des;
+        public string[] Answers;
+        public int correctAnswer;
+        public int Difficulty;
+        public string Explaination;
+        public string createAt;
+        public bool Active;
+        public string id;
+    }
+
     [Serializable]
     private class FetchDataModel
     {
-        public string testId;
-        public string userId;
-        public string gameName;
-        public string score;
-        public List<Question> questions;
+        public List<QuestionData> questions;
+        public string gameId;
+        public int level;
+        public string email;
+        public string id;
     }
+    public class RecordModel
+    {
+        public int Score;
+        public List<bool> selectionResult;
+        public List<RecordQuestionData> questions;
+    }
+
+    public RecordModel record;
 
     public static GameInformation Instance;
 
-    public string testId;
-    public string userId;
-    public string gameName;
-    public string score;
+    public string gameId;
+    public int level;
+    public string email;
+    public string id;
     public int curQuestion = 0;
 
     //public string token;
-    public List<Question> questions;
-    public List<string> answers;
+    public List<QuestionData> questions;
+    public List<int> answers;
 
     private void Awake()
     {
@@ -33,19 +62,20 @@ public class GameInformation : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
     }
 
+
     public void setData(string jsonData)
     {
         Debug.Log(jsonData);
         FetchDataModel newData = new FetchDataModel();
         newData = JsonUtility.FromJson<FetchDataModel>(jsonData);
-        this.testId = newData.testId;
-        this.userId = newData.userId;
-        this.gameName = newData.gameName;
-        this.score = newData.score;
+        this.gameId = newData.gameId;
+        this.level = newData.level;
+        this.email = newData.email;
+        this.id = newData.id;
         this.questions = newData.questions;
 
     }
-    public Question getQuestion(int idx)
+    public QuestionData getQuestion(int idx)
     {
         return questions[idx];
     }
@@ -60,16 +90,16 @@ public class GameInformation : MonoBehaviour {
         return questions.Count;
     }
 
-    public Question getCurQuestion()
+    public QuestionData getCurQuestion()
     {
         return questions[curQuestion];
     }
 
-    public void saveAnswers(int idx, string answer)
+    public void saveAnswers(int idx, int answer)
     {
         if (this.answers == null)
         {
-            answers = new List<string>();
+            answers = new List<int>();
         }
 
         if (idx > answers.Count - 1)
