@@ -52,6 +52,7 @@ public class GameInformation : MonoBehaviour
     public int curQuestion = 0;
 
     //public string token;
+    [SerializeField]
     public List<QuestionData> questions;
     public List<int> answers;
 

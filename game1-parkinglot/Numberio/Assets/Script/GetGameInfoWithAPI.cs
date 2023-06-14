@@ -21,7 +21,7 @@ public class GetGameInfoWithAPI : MonoBehaviour
     public void Start()
     {
         Debug.Log("Scene 1");
-        getData();
+        
         try
         {
             Uri userURI = new Uri(Application.absoluteURL);
@@ -31,6 +31,7 @@ public class GetGameInfoWithAPI : MonoBehaviour
         {
             Debug.Log("Cant iddentify test id");
         }
+        getData();
         PrepareGame.Instance.Prepare();
     }
     // /api/gameSession/$token ///

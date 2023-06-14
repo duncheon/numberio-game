@@ -8,6 +8,7 @@ public class LoadSceneQuestion
 {
     public GameObject scenePanel;
     public GameInformation.QuestionData question;
+
     // Start is called before the first frame update
 
     public void setData()

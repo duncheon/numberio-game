@@ -513,7 +513,35 @@ MonoBehaviour:
   email: 
   id: 
   curQuestion: 0
-  questions: []
+  questions:
+  - id: 0
+    des: 6 - .... = 2
+    answers:
+    - 5
+    - 4
+    - 8
+    - 3
+  - id: 1
+    des: 3 + 4 + 2 = ......
+    answers:
+    - 7
+    - 8
+    - 6
+    - 9
+  - id: 2
+    des: "6 \u2013 5 = ......."
+    answers:
+    - 3
+    - 2
+    - 4
+    - 1
+  - id: 3
+    des: '6 + 1 = 8 - ...... '
+    answers:
+    - 3
+    - 2
+    - 1
+    - 7
   answers: 
 --- !u!1 &228971548
 GameObject:
