@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,8 +19,15 @@ public class PointAndShoot : MonoBehaviour
 
     public TextMeshProUGUI txtPoint;
     public TextMeshProUGUI txtQues;
+    public TextMeshProUGUI txtQuesNum;
     public TextMeshProUGUI txtFinalPoint;
     public TextMeshProUGUI txtComment;
+
+    private string[] txtQuestions = { "Điền số thích hợp vào chỗ chấm: 1 = .../99" };
+    private string[] txtTrueAns = { "99" };
+    private string[,] txtFalseAns = {
+                        {"100", "98", "97"},
+                    };
 
     public TimeBar TimeBar;
 
@@ -100,12 +107,26 @@ public class PointAndShoot : MonoBehaviour
         }
         if (spawnTarget && count < 10 && showTime < 0)
         {
-            txtQues.text = "Question " + (count + 1).ToString() + ":"; 
+            int temp = 0;
+            txtQuesNum.text = "Question " + (count + 1).ToString() + ":";
+            txtQues.text = txtQuestions[0];
             targetBoards[0] = Instantiate(targetPrefab, new Vector3(-6, Random.Range(0f, 1f), 0), Quaternion.Euler(Vector3.zero)) as GameObject;
             targetBoards[1] = Instantiate(targetPrefab, new Vector3(-2, Random.Range(0f, 1f), 0), Quaternion.Euler(Vector3.zero)) as GameObject;
             targetBoards[2] = Instantiate(targetPrefab, new Vector3(2, Random.Range(0f, 1f), 0), Quaternion.Euler(Vector3.zero)) as GameObject;
             targetBoards[3] = Instantiate(targetPrefab, new Vector3(6, Random.Range(0f, 1f), 0), Quaternion.Euler(Vector3.zero)) as GameObject;
             targetBoards[Random.Range(0,targetBoards.Length)].GetComponent<TargetController>().check = true;
+            foreach(GameObject targetBoard in  targetBoards)
+            {
+                if(targetBoard.GetComponent<TargetController>().check == true)
+                {
+                    targetBoard.GetComponentInChildren<TextMeshPro>().text = txtTrueAns[0];
+                }
+                else
+                {
+                    targetBoard.GetComponentInChildren<TextMeshPro>().text = txtFalseAns[0,temp];
+                    temp++;
+                }
+            }
             spawnTarget = false;
             checkOnTarget = false;
             canShoot = true;
@@ -177,3 +198,5 @@ public class PointAndShoot : MonoBehaviour
         SceneManager.LoadScene(num);
     }
 }
+
+

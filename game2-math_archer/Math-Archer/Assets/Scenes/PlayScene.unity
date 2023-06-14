@@ -1209,7 +1209,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   txtPoint: {fileID: 1559436342}
-  txtQues: {fileID: 165647225}
+  txtQues: {fileID: 1482454785}
+  txtQuesNum: {fileID: 165647225}
   txtFinalPoint: {fileID: 717597848}
   txtComment: {fileID: 1493736614}
   TimeBar: {fileID: 1721451575}

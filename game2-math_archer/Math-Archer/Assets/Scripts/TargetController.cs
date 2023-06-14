@@ -9,6 +9,11 @@ public class TargetController : MonoBehaviour
     public bool checkOnTarget = false;
     public bool check = false;
 
+    private string[] txtTrueAns = { "99" };
+    private string[,] txtFalseAns = {
+                        {"100", "98", "97"},
+                    };
+
     //adjust this to change speed
     float speed = 3f;
     //adjust this to change how high it goes
@@ -36,14 +41,6 @@ public class TargetController : MonoBehaviour
             newY = Mathf.Sin(random * Time.time * speed);
             //set the object's Y to the new calculated Y
             transform.position = new Vector3(pos.x, pos.y + newY * height, pos.z);
-        }
-        if(check )
-        {
-            txt.text = "T";
-        }
-        else
-        {
-            txt.text = "F";
         }
     }
 }
